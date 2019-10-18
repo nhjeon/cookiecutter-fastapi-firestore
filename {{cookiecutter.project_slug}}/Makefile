@@ -12,7 +12,7 @@ format:
 	black -S -l 79 app
 
 pytest:
-    PYTHONPATH=./app python -m pytest
+	PYTHONPATH=./app python -m pytest
 
 coverage:
 	PYTHONPATH=./app python -m pytest ./test --cov app --cov-report term --cov-report xml
