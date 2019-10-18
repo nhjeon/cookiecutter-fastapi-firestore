@@ -1,0 +1,5 @@
+{
+    "project_name": "Test Project",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "service_account_file" : ""
+}
