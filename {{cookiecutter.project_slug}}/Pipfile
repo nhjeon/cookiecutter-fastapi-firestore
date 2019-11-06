@@ -14,6 +14,7 @@ pytest-cov = "==2.7.1"
 "fastapi =" = "==0.36.0"
 firebase-admin = "*"
 email-validator = "*"
+uvicorn = "*"
 
 [requires]
 python_version = "3.7"
