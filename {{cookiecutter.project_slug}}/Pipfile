@@ -11,7 +11,7 @@ pytest = "==5.1.1"
 pytest-cov = "==2.7.1"
 
 [packages]
-"fastapi =" = "==0.36.0"
+fastapi = "*"
 firebase-admin = "*"
 email-validator = "*"
 uvicorn = "*"
