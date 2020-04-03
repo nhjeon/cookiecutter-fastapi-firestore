@@ -12,7 +12,7 @@ class DocModelBase(BaseModel):
                 break
 
         for i in self.fields:
-            if 'id' == i:
+            if i == 'id':
                 doc_id = getattr(self, i)
                 break
 
