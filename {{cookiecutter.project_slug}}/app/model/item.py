@@ -10,13 +10,14 @@ class ItemBaseInDB(DocModelBase):
 class Item(ItemBaseInDB):
     item_id: str
     name: str
-    create_time: datetime = datetime.utcnow()
+    create_time: datetime
     update_time: datetime = None
 
 
 class ItemCreate(ItemBaseInDB):
     item_id: str
     name: str
+    create_time: datetime = datetime.utcnow()
 
 
 class ItemUpdate(ItemBaseInDB):
