@@ -30,6 +30,10 @@ class Query:
         docs = db.db.collection(self.model.__table_name__).stream()
         return list(map(lambda x: self.model(**x.to_dict()), docs))
 
+    def where(self, field_path, op_string, value):
+        docs = self.get_collection().where(field_path, op_string, value).stream()
+        return list(map(lambda x: self.model(**x.to_dict()), docs))
+
 
 class FireStoreDB:
     def __init__(self):
