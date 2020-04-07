@@ -18,13 +18,17 @@ class Query:
         docs = (
             db.db.collection(self.model.__table_name__).document(doc_id).get()
         )
-        return docs.to_dict()
+
+        if docs.exists:
+            return self.model(**docs.to_dict())
+        else:
+            return None
 
     def get_list(self):
         from database import db
 
         docs = db.db.collection(self.model.__table_name__).stream()
-        return list(map(lambda x: x.to_dict(), docs))
+        return list(map(lambda x: self.model(**x.to_dict()), docs))
 
 
 class FireStoreDB:
@@ -32,7 +36,7 @@ class FireStoreDB:
         import os
 
         service_account_path = os.getenv(
-            'GCP_SERVICE_ACCOUNT', 'app/serviceAccount.json'
+            'GCP_SERVICE_ACCOUNT', 'serviceAccount.json'
         )
         cred = credentials.Certificate(service_account_path)
         firebase_admin.initialize_app(cred)
@@ -40,22 +44,30 @@ class FireStoreDB:
 
     query = Query
 
-    def update(self, doc_id, obj):
+    def update(self, doc_id, obj, ret_model = None):
         _ = (
             self.db.collection(obj.__table_name__)
             .document(doc_id)
             .update(obj.dict())
         )
         new_obj = self.db.collection(obj.__table_name__).document(doc_id).get()
-        return new_obj.to_dict()
+        if ret_model:
+            return ret_model(**new_obj.to_dict())
+        else:
+            return new_obj.__class__(**new_obj.to_dict())
 
-    def save(self, obj):
+    def save(self, obj, ret_model = None):
         _ = (
             self.db.collection(obj.__table_name__)
             .document(obj.doc_id)
             .set(obj.dict())
         )
-        return obj.dict()
+
+        if ret_model:
+            return ret_model(**obj.dict())
+        else:
+            return obj.__class__(**obj.dict())
+
 
     def delete(self, obj):
         self.db.collection(obj.__table_name__).document(obj.doc_id).delete()
