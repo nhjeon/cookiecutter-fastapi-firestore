@@ -11,6 +11,9 @@ format:
 	isort -rc -y app
 	black -S -l 79 app
 
+run:
+	PYTHONPATH=./app uvicorn main:app --reload
+
 pytest:
 	PYTHONPATH=./app python -m pytest
 
