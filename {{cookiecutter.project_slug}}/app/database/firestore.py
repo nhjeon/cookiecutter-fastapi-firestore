@@ -3,7 +3,7 @@ from firebase_admin import credentials, firestore
 
 
 class Query:
-    def __init__(self, model):
+    def __init__(self, *, model):
         self.model = model
         self.table_name = model.__table_name__
 
@@ -44,7 +44,7 @@ class FireStoreDB:
 
     query = Query
 
-    def update(self, doc_id, obj, ret_model = None):
+    def update(self, *, doc_id, obj, ret_model = None):
         _ = (
             self.db.collection(obj.__table_name__)
             .document(doc_id)
@@ -56,7 +56,7 @@ class FireStoreDB:
         else:
             return new_obj.__class__(**new_obj.to_dict())
 
-    def save(self, obj, ret_model = None):
+    def save(self, *, obj, ret_model = None):
         _ = (
             self.db.collection(obj.__table_name__)
             .document(obj.doc_id)
@@ -69,5 +69,5 @@ class FireStoreDB:
             return obj.__class__(**obj.dict())
 
 
-    def delete(self, obj):
+    def delete(self, *, obj):
         self.db.collection(obj.__table_name__).document(obj.doc_id).delete()
