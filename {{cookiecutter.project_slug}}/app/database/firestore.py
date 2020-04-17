@@ -21,8 +21,8 @@ class Query:
 
         if docs.exists:
             return self.model(**docs.to_dict())
-        else:
-            return None
+
+        return None
 
     def get_list(self):
         from database import db
@@ -31,7 +31,9 @@ class Query:
         return list(map(lambda x: self.model(**x.to_dict()), docs))
 
     def where(self, field_path, op_string, value):
-        docs = self.get_collection().where(field_path, op_string, value).stream()
+        docs = (
+            self.get_collection().where(field_path, op_string, value).stream()
+        )
         return list(map(lambda x: self.model(**x.to_dict()), docs))
 
 
@@ -48,7 +50,7 @@ class FireStoreDB:
 
     query = Query
 
-    def update(self, *, doc_id, obj, ret_model = None):
+    def update(self, *, doc_id, obj, ret_model=None):
         _ = (
             self.db.collection(obj.__table_name__)
             .document(doc_id)
@@ -57,10 +59,10 @@ class FireStoreDB:
         new_obj = self.db.collection(obj.__table_name__).document(doc_id).get()
         if ret_model:
             return ret_model(**new_obj.to_dict())
-        else:
-            return new_obj.__class__(**new_obj.to_dict())
 
-    def save(self, *, obj, ret_model = None):
+        return new_obj.__class__(**new_obj.to_dict())
+
+    def save(self, *, obj, ret_model=None):
         _ = (
             self.db.collection(obj.__table_name__)
             .document(obj.doc_id)
@@ -69,9 +71,8 @@ class FireStoreDB:
 
         if ret_model:
             return ret_model(**obj.dict())
-        else:
-            return obj.__class__(**obj.dict())
 
+        return obj.__class__(**obj.dict())
 
     def delete(self, *, obj):
         self.db.collection(obj.__table_name__).document(obj.doc_id).delete()
