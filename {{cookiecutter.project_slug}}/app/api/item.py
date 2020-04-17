@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from model.item import ItemCreate, ItemUpdate
 from service import item_service
 
-router = APIRouter()  # pylint: disable=invalid-name
+router = APIRouter()
 
 
 @router.get("/")

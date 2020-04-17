@@ -5,7 +5,7 @@ init:
 check:
 	isort -rc --check-only app
 	black -S -l 79 --check app
-	pylint app --disable=missing-docstring
+	pylint app
 
 format:
 	isort -rc -y app

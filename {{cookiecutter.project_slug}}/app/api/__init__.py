@@ -3,9 +3,9 @@ from fastapi.security import APIKeyHeader
 
 from api import item
 
-api_router = APIRouter()  # pylint: disable=invalid-name
+api_router = APIRouter()
 
-router = APIRouter()  # pylint: disable=invalid-name
+router = APIRouter()
 
 API_KEY_SCHEME = APIKeyHeader(name='X-API-KEY')
 

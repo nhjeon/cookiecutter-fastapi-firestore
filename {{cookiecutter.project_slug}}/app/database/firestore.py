@@ -44,7 +44,7 @@ class FireStoreDB:
         )
         cred = credentials.Certificate(service_account_path)
         firebase_admin.initialize_app(cred)
-        self.db = firestore.client()  # pylint: disable=invalid-name
+        self.db = firestore.client()
 
     query = Query
 
