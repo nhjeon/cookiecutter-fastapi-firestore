@@ -27,3 +27,6 @@ htmlcov:
 
 requirements:
 	pipenv lock -r > requirements.txt
+
+docker-build:
+	gcloud builds submit --config cloudbuild.yaml
