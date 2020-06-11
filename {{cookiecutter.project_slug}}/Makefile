@@ -12,7 +12,7 @@ format:
 	black -S -l 79 app
 
 run:
-	PYTHONPATH=./app uvicorn main:app --reload
+	GOOGLE_APPLICATION_CREDENTIALS=$(PWD)/serviceAccount.json PYTHONPATH=./app uvicorn main:app --reload
 
 pytest:
 	PYTHONPATH=./app python -m pytest
@@ -27,6 +27,3 @@ htmlcov:
 
 requirements:
 	pipenv lock -r > requirements.txt
-
-docker-build:
-	gcloud builds submit --config cloudbuild.yaml

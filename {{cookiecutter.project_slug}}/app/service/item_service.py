@@ -1,4 +1,4 @@
-from database import db
+from database.db import db
 from model.item import Item, ItemCreate, ItemUpdate
 
 

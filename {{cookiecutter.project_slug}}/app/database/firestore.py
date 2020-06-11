@@ -1,5 +1,4 @@
-import firebase_admin
-from firebase_admin import credentials, firestore
+from google.cloud import firestore
 
 
 class Query:
@@ -8,12 +7,11 @@ class Query:
         self.table_name = model.__table_name__
 
     def get_collection(self):
-        from database import db
-
+        from database.db import db
         return db.db.collection(self.model.__table_name__)
 
     def get(self, *, doc_id):
-        from database import db
+        from database.db import db
 
         docs = (
             db.db.collection(self.model.__table_name__).document(doc_id).get()
@@ -25,7 +23,7 @@ class Query:
         return None
 
     def get_list(self):
-        from database import db
+        from database.db import db
 
         docs = db.db.collection(self.model.__table_name__).stream()
         return list(map(lambda x: self.model(**x.to_dict()), docs))
@@ -39,14 +37,7 @@ class Query:
 
 class FireStoreDB:
     def __init__(self):
-        import os
-
-        service_account_path = os.getenv(
-            'GCP_SERVICE_ACCOUNT', 'serviceAccount.json'
-        )
-        cred = credentials.Certificate(service_account_path)
-        firebase_admin.initialize_app(cred)
-        self.db = firestore.client()
+        self.db = firestore.Client()
 
     query = Query
 

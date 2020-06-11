@@ -12,9 +12,9 @@ pytest-cov = "==2.7.1"
 
 [packages]
 fastapi = "*"
-firebase-admin = "*"
 email-validator = "*"
 uvicorn = "*"
+google-cloud-firestore = "*"
 
 [requires]
 python_version = "3.7"
