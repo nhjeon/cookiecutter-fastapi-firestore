@@ -25,7 +25,9 @@ $ make test
 ## Run
 
 ``` sh
-PYTHONPATH=./app uvicorn main:app --reload
+GOOGLE_APPLICATION_CREDENTIALS=./serviceAccount.json PYTHONPATH=./app python ./run.py
+or
+make run
 ```
 
 ## Docker
