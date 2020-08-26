@@ -15,6 +15,7 @@ fastapi = "*"
 email-validator = "*"
 uvicorn = "*"
 google-cloud-firestore = "*"
+tenacity = "*"
 
 [requires]
 python_version = "3.7"
