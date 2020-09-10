@@ -38,6 +38,14 @@ docker build -t myimage .
 docker run -d --name mycontainer -p 80:80 myimage
 ```
 
+## Docker in local
+
+```
+docker build -t myimage -f Dockerfile-local .
+docker run -d --name mycontainer -p 80:80 -v $(PWD)/app:/app myimage
+```
+
+
 
 ## Requirements
 
