@@ -5,8 +5,6 @@ from api import item
 
 api_router = APIRouter()
 
-router = APIRouter()
-
 API_KEY_SCHEME = APIKeyHeader(name='X-API-KEY')
 
 
